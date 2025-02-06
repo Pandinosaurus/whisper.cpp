@@ -1,7 +1,10 @@
-if (WHISPER_SUPPORT_SDL2)
-    # stream
-    set(TARGET stream)
+if (WHISPER_SDL2)
+    set(TARGET whisper-stream)
     add_executable(${TARGET} stream.cpp)
-    target_include_directories(${TARGET} PRIVATE ${SDL2_INCLUDE_DIRS})
-    target_link_libraries(${TARGET} PRIVATE whisper ${SDL2_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT})
+
+    include(DefaultTargetOptions)
+
+    target_link_libraries(${TARGET} PRIVATE common common-sdl whisper ${CMAKE_THREAD_LIBS_INIT})
+
+    install(TARGETS ${TARGET} RUNTIME)
 endif ()
